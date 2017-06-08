@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="text-center">
-        <h1>撰写新文章</h1>
+        <h1>编辑文章</h1>
     </div>
-    {!! Form::open(['url'=>'articles']) !!}
+    {!! Form::model($article,['method'=>'patch','url'=>'articles/'.$article->id]) !!}
     <div class="form-group">
         {!! Form::label('title','标题:') !!}
         {!! Form::text('title',null,['class'=>'form-control']) !!}
@@ -22,7 +22,7 @@
         {!! Form::input('date','published_at',date('Y-m-d'),['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
-        {!! Form::submit('发表文章',['class'=>'btn btn-success form-control']) !!}
+        {!! Form::submit('更新文章',['class'=>'btn btn-success form-control']) !!}
     </div>
     {!! Form::close() !!}
     @if($errors->any())
