@@ -2,12 +2,11 @@
 <html>
 <head>
     <title>Blog51</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
         @yield('content')
     </div>
-    @yield('footer')
 </body>
 </html>
