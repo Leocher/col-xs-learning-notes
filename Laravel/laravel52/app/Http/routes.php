@@ -14,3 +14,11 @@
 Route::get('/user/{user}', function (\App\User $user) {
     return $user;
 })->middleware('throttle:3');
+
+Route::get('/',function(){
+    return view('welcome');
+});
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
