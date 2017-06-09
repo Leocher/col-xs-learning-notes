@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/user/{username}', function (\App\User $user) {
+Route::get('/user/{user}', function (\App\User $user) {
     return $user;
-});
+})->middleware('throttle:3');
