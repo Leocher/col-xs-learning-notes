@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/user/{username}', function (\App\User $user) {
+    return $user;
 });
