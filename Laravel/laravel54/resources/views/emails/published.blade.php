@@ -11,6 +11,13 @@ The body of your message.
 Button Text
 @endcomponent
 
+@component('mail::panel')
+    Lorum ipsum dolor sit amet,Lorum ipsum dolor sit amet,Lorum ipsum dolor sit amet,
+    Lorum ipsum dolor sit amet,Lorum ipsum dolor sit amet,Lorum ipsum dolor sit amet,
+    Lorum ipsum dolor sit amet,Lorum ipsum dolor sit amet,Lorum ipsum dolor sit amet,
+    Lorum ipsum dolor sit amet,Lorum ipsum dolor sit amet,Lorum ipsum dolor sit amet,
+@endcomponent
+
 Thanks,<br>
 {{ config('app.name') }}
 @endcomponent

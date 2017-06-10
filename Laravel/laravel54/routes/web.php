@@ -1,5 +1,5 @@
 <?php
-
+use Facades\App\Services\Weibo;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/listen',function(){
+    \App\Post::create(['title'=>'Title','body'=>'My Body']);
+});
 
 Route::prefix('admin')->middleware('admin')->name('dashboard')->get('/', function () {
     return view('welcome');
@@ -26,7 +30,11 @@ Route::get('/home',function(){
    return view('welcome');
 });
 
-Route::get('/emails',function(){
+Route::get('/email',function(){
    $email = new \App\Mail\LessonPublished(\App\User::first());
     Mail::to(\App\User::first())->send($email);
+});
+
+Route::get('/weibo',function(){
+    Weibo::publish('这是一条微博');
 });
