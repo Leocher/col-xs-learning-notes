@@ -15,9 +15,10 @@ Route::prefix('admin')->middleware('admin')->name('dashboard')->get('/', functio
     return view('welcome');
 });
 
-Route::get('posts/{post}','PostController@show');
+Route::resource('posts','PostController');
 
 Route::get('/',function(){
     $posts = \App\Post::all();
     return $posts->map->title;
 });
+
