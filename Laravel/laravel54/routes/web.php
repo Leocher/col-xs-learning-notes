@@ -25,3 +25,8 @@ Route::get('/',function(){
 Route::get('/home',function(){
    return view('welcome');
 });
+
+Route::get('/emails',function(){
+   $email = new \App\Mail\LessonPublished(\App\User::first());
+    Mail::to(\App\User::first())->send($email);
+});
