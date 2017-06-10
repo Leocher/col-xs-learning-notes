@@ -22,3 +22,6 @@ Route::get('/',function(){
     return $posts->map->title;
 });
 
+Route::get('/home',function(){
+   return view('welcome');
+});
