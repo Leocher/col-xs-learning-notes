@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
+Route::prefix('admin')->middleware('admin')->name('dashboard')->get('/', function () {
     return view('welcome');
 });
+
+Route::get('posts/{post}','PostController@show');
