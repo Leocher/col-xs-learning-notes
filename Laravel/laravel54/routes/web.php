@@ -16,3 +16,8 @@ Route::prefix('admin')->middleware('admin')->name('dashboard')->get('/', functio
 });
 
 Route::get('posts/{post}','PostController@show');
+
+Route::get('/',function(){
+    $posts = \App\Post::all();
+    return $posts->map->title;
+});
