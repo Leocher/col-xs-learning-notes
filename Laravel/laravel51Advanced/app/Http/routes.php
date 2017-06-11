@@ -30,3 +30,8 @@ Route::get('/event', function () {
     $user = \App\User::find(1);
     event(new \App\Events\UserSignUp($user));
 });
+
+Route::get('/lessons',function(){
+    $lessons = \App\Lesson::latest()->paginate(6);
+    return view('lessons.index',compact('lessons'));
+});

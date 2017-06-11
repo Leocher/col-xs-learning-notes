@@ -20,3 +20,12 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Lesson::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->sentence,
+        'intro' => $faker->paragraph,
+        'image' => $faker->imageUrl(),
+        'published_at' => $faker->dateTime,
+    ];
+});
