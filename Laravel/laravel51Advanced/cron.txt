@@ -1,0 +1,1 @@
+* * * * * php /C:\Users\anonymous\Desktop\col-xs-learning-notes\Laravel\laravel51Advanced/artisan schedule:run >> /dev/null 2>&1
