@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::loginUsingId(3);
+Route::group(['prefix'=>'admin','middleware'=>'admin'],function(){
+   Route::get('/users',function(){
+       return 'only admin';
+   }) ;
+});
