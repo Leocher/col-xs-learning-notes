@@ -15,9 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/other', function () {
+    return view('other');
+});
+
 Auth::loginUsingId(3);
 Route::group(['prefix'=>'admin','middleware'=>'admin'],function(){
    Route::get('/users',function(){
        return 'only admin';
    }) ;
+});
+
+Route::get('/event', function () {
+    $user = \App\User::find(1);
+    event(new \App\Events\UserSignUp($user));
 });
