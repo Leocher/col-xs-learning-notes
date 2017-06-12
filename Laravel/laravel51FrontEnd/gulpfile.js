@@ -1,5 +1,3 @@
-var elixir = require('laravel-elixir');
-
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -20,7 +18,20 @@ var elixir = require('laravel-elixir');
 /*elixir(function(mix) {
     mix.sass('app.scss');
 });*/
-elixir.config.assetsPath = 'assets';
+
+/*elixir.config.assetsPath = 'assets';
 elixir(function(mix) {
     mix.less('app.less');
+});*/
+
+/*elixir(function(mix) {
+ mix.scripts(['1.js','2.js','3.js']);
+ });*/
+
+var elixir = require('laravel-elixir');
+elixir(function(mix) {
+    mix.styles(['1.css','2.css','3.css']).version('css/all.css');
 });
+
+
+

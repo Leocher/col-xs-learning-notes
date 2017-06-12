@@ -1,0 +1,1 @@
+{"version":3,"sources":["1.css","2.css","3.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;ACHA;AACA;AACA;AACA;ACHA;AACA;AACA;AACA","file":"all.css","sourcesContent":["h1{\r\n    font-size: 4em;\r\n}\r\n","h2{\r\n    font-size: 3em;\r\n}\r\n","h3{\r\n    font-size: 2em;\r\n}\r\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["1.js","2.js","3.js"],"names":[],"mappings":"AAAA;AACA;ACDA;AACA;ACDA;AACA","file":"all.js","sourcesContent":["var one = '1.js';\r\n","var two = '2.js';\r\n","var three = '3.js';\r\n"]}
