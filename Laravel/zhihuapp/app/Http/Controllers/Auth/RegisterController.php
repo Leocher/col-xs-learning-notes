@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Mail;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Naux\Mail\SendCloudTemplate;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -62,10 +66,40 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'avatar' => '/images/avatars/default.png',
+            'confirmation_token' => str_random(40),
             'password' => bcrypt($data['password']),
         ]);
+        $this->sendVerifyEmailTo($user);
+        return $user;
+    }
+
+    private function sendVerifyEmailTo($user)
+    {
+        $data = [
+            'url' => route('email.verify',['token' => $user->confirmation_token]),
+            'name' => $user->name
+        ];
+        $template = new SendCloudTemplate('zhihu_app_register', $data);
+
+        Mail::raw($template, function ($message) use ($user) {
+            $message->from('user@example.com', 'Laravel');
+            $message->to($user->email);
+        });
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        //$this->guard()->login($user);// 去掉这一行就可以了,验证邮箱后才可以登录
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
     }
 }
