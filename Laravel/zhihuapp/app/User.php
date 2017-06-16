@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Naux\Mail\SendCloudTemplate;
 use Mail;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -37,5 +38,10 @@ class User extends Authenticatable
             $message->from('test@laravel.com','Laravel');
             $message->to($this->email);
         });
+    }
+
+    public function owns(Model $model)
+    {
+        return $this->id == $model->user_id;
     }
 }

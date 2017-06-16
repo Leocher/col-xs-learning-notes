@@ -8302,4 +8302,49 @@ button.close {
   border-color: #5897fb;
 }
 
+.panel-body img {
+  width: 100%;
+}
+
+a.topic {
+  background: #eff6fa;
+  padding: 1px 10px 0;
+  border-radius: 30px;
+  text-decoration: none;
+  margin: 0 5px 5px 0;
+  display: inline-block;
+  white-space: nowrap;
+  cursor: pointer;
+  float: right;
+}
+
+a.topic:hover {
+  background: #259;
+  color: #fff;
+  text-decoration: none;
+}
+
+.button.is-naked {
+  background: 0 0;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  height: auto;
+}
+
+.actions {
+  display: -webkit-box;
+  display: flex;
+  padding: 10px 20px;
+}
+
+.delete-form {
+  margin-left: 20px;
+}
+
+.delete-button {
+  color: #3097D1;
+  text-decoration: none;
+}
+
 /*# sourceMappingURL=app.css.map */
