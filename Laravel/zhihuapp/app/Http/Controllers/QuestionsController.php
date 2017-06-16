@@ -42,6 +42,7 @@ class QuestionsController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->get('topics'));
         $rules = [
             'title' => 'required|min:6|max:196',
             'body' => 'required|min:26'
