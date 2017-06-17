@@ -44,4 +44,25 @@ class User extends Authenticatable
     {
         return $this->id == $model->user_id;
     }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
+    public function follows()
+    {
+        return $this->belongsToMany(Question::class,'user_question')->withTimestamps();
+    }
+
+    public function followThis($question)
+    {
+        return $this->follows()->toggle($question);
+    }
+
+    public function followed($question)
+    {
+        //取反再取反，强制返回布尔值
+        return !! $this->follows()->where('question_id',$question)->count();
+    }
 }
