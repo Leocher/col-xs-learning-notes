@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','avatar','confirmation_token'
+        'name', 'email', 'password','avatar','confirmation_token','api_token'
     ];
 
     /**
@@ -64,5 +64,20 @@ class User extends Authenticatable
     {
         //取反再取反，强制返回布尔值
         return !! $this->follows()->where('question_id',$question)->count();
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(self::class,'followers','follower_id','followed_id')->withTimestamps();
+    }
+
+    public function followThisUser($user)
+    {
+        return $this->followers()->toggle($user);
+    }
+
+    public function followersUser()
+    {
+        return $this->belongsToMany(self::class,'followers','followed_id','follower_id')->withTimestamps();
     }
 }
