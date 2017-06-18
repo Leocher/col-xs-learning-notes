@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Mailer\UserMailer;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Naux\Mail\SendCloudTemplate;
@@ -32,12 +33,7 @@ class User extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        $data = ['url' => url('password/reset',$token)];
-        $template = new SendCloudTemplate('zhihu_app_password_reset',$data);
-        Mail::raw($template,function($message){
-            $message->from('test@laravel.com','Laravel');
-            $message->to($this->email);
-        });
+        (new UserMailer())->passwordReset($this->email,$token);
     }
 
     public function owns(Model $model)
@@ -79,5 +75,20 @@ class User extends Authenticatable
     public function followersUser()
     {
         return $this->belongsToMany(self::class,'followers','followed_id','follower_id')->withTimestamps();
+    }
+
+    public function votes()
+    {
+        return $this->belongsToMany(Answer::class,'votes')->withTimestamps();
+    }
+
+    public function voteFor($answer)
+    {
+        return $this->votes()->toggle($answer);
+    }
+
+    public function hasVotedFor($answer)
+    {
+        return !! $this->votes()->where('answer_id',$answer)->count();
     }
 }

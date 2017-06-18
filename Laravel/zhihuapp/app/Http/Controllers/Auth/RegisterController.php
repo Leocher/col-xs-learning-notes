@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mailer\UserMailer;
 use Mail;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -80,16 +81,7 @@ class RegisterController extends Controller
 
     private function sendVerifyEmailTo($user)
     {
-        $data = [
-            'url' => route('email.verify',['token' => $user->confirmation_token]),
-            'name' => $user->name
-        ];
-        $template = new SendCloudTemplate('zhihu_app_register', $data);
-
-        Mail::raw($template, function ($message) use ($user) {
-            $message->from('user@example.com', 'Laravel');
-            $message->to($user->email);
-        });
+        (new UserMailer())->welcome($user);
     }
 
     public function register(Request $request)
