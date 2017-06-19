@@ -18,7 +18,13 @@
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>;
-        Laravel.apiToken = "{{ Auth::check() ? 'Bearer '.Auth::user()->api_token : 'Bearer ' }}"
+        Laravel.apiToken = "{{ Auth::check() ? 'Bearer '.Auth::user()->api_token : 'Bearer ' }}";
+        @if(Auth::check())
+            window.Zhihu = {
+                name:"{{ Auth::user()->name }}",
+                avatar:"{{ Auth::user()->avatar }}"
+            }
+        @endif
     </script>
 </head>
 <body>
