@@ -22,13 +22,27 @@ class InboxController extends Controller
             ->orWhere('from_user_id',user()->id)
             ->with('fromUser','toUser')
             ->get();
-        return view('inbox.index',['messages' => $messages->groupBy('to_user_id')]);
+        return view('inbox.index',['messages' => $messages->unique('dialog_id')->groupBy('to_user_id')]);
     }
 
     public function show($dialogId)
     {
-        $messages = Message::where('dialog_id',$dialogId)->get();
+        $messages = Message::where('dialog_id',$dialogId)->latest()->get();
+        $messages->markAsRead();
+        return view('inbox.show',compact('messages','dialogId'));
+    }
 
-        return $messages;
+    public function store($dialogId)
+    {
+        $message = Message::where('dialog_id',$dialogId)->first();
+        $toUserId = $message->from_user_id === user()->id ? $message->to_user_id : $message->from_user_id;
+        Message::create([
+            'from_user_id' => user()->id,
+            'to_user_id' => $toUserId,
+            'body' => request('body'),
+            'dialog_id' => $dialogId
+        ]);
+
+        return back();
     }
 }
